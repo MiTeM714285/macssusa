@@ -15,25 +15,25 @@ public class BoardDAOImpl implements BoardDAO {
 	//private static String namespace = "com.macssusa.mapper.BoardMapper";
 
 	@Override
-	public List<BoardVO> getBoardList_MacReview(){
+	public List<BoardVO> bdao_getBoardList_MacReview(){
 		// TODO Auto-generated method stub
 		return mapper.getBoardList_MacReview();
 	}
 
 	@Override
-	public List<BoardVO> getBoardList_AddonReview(){
+	public List<BoardVO> bdao_getBoardList_AddonReview(){
 		// TODO Auto-generated method stub
 		return mapper.getBoardList_AddonReview();
 	}
 
 	@Override
-	public List<BoardVO> getBoardList_MacQuestion(){
+	public List<BoardVO> bdao_getBoardList_MacQuestion(){
 		// TODO Auto-generated method stub
 		return mapper.getBoardList_MacQuestion();
 	}
 
 	@Override
-	public List<BoardVO> getBoardList_AddonQuestion(){
+	public List<BoardVO> bdao_getBoardList_AddonQuestion(){
 		// TODO Auto-generated method stub
 		return mapper.getBoardList_AddonQuestion();
 	}

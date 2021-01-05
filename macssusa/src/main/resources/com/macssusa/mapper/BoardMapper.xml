@@ -7,25 +7,25 @@
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
 	from spr_board
-	where btype=1;
+	where btype=1 and available=1;
 </select>
 <select id="getBoardList_AddonReview" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
 	from spr_board
-	where btype=2;
+	where btype=2 and available=1;
 </select>
 <select id="getBoardList_MacQuestion" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
 	from spr_board
-	where btype=3;
+	where btype=3 and available=1;
 </select>
 <select id="getBoardList_AddonQuestion" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
 	from spr_board
-	where btype=4;
+	where btype=4 and available=1;
 </select>
   
 </mapper>

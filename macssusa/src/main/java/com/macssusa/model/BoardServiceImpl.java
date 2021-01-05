@@ -14,25 +14,25 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> getBoardList_MacReview(){
 		// TODO Auto-generated method stub
-		return boardDao.getBoardList_MacReview();
+		return boardDao.bdao_getBoardList_MacReview();
 	}
 
 	@Override
 	public List<BoardVO> getBoardList_AddonReview(){
 		// TODO Auto-generated method stub
-		return boardDao.getBoardList_AddonReview();
+		return boardDao.bdao_getBoardList_AddonReview();
 	}
 
 	@Override
 	public List<BoardVO> getBoardList_MacQuestion(){
 		// TODO Auto-generated method stub
-		return boardDao.getBoardList_MacQuestion();
+		return boardDao.bdao_getBoardList_MacQuestion();
 	}
 
 	@Override
 	public List<BoardVO> getBoardList_AddonQuestion(){
 		// TODO Auto-generated method stub
-		return boardDao.getBoardList_AddonQuestion();
+		return boardDao.bdao_getBoardList_AddonQuestion();
 	}
 
 }

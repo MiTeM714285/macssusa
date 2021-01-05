@@ -15,5 +15,7 @@
 <p><a href="/board/board_addonreview">주변기기 리뷰 임시 게시판 가기</a>
 <p><a href="/board/board_macquestion">맥질문 임시 게시판 가기</a>
 <p><a href="/board/board_addonquestion">주변기기 리뷰 임시 게시판 가기</a>
+
+<p><a href="/member/registration">임시 회원가입 이동</a>
 </body>
 </html>
