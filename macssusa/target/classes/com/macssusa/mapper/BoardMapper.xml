@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macssusa.mapper.BoardMapper">
+
+<!-- 게시물 목록(검색제외) -->
+<select id="getBoardList_MacReview" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=1;
+</select>
+<select id="getBoardList_AddonReview" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=2;
+</select>
+<select id="getBoardList_MacQuestion" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=3;
+</select>
+<select id="getBoardList_AddonQuestion" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=4;
+</select>
+  
+</mapper>
+  
