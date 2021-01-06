@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,16 +20,21 @@
   </tr>
  </thead>
  <tbody>
- </tbody>
-	<c:forEach items="${list}" var="list">
+ 	<c:forEach items="${list}" var="list">
 	 <tr>
 	  <td>${list.bnum}</td>
 	  <td>${list.title}</td>
-	  <td>${list.regDate}</td>
+	  <td>${list.regdate}</td>
 	  <td>${list.memberid}</td>
 	  <td>${list.hitcount}</td>
 	 </tr>
 	</c:forEach>
+ </tbody>
 </table>
+
+<c:if test="${!empty sessionScope.sessId }">
+	<a href="/board/board_macquestion_write">게시글작성</a>
+</c:if>
+
 </body>
 </html>

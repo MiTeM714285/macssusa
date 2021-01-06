@@ -16,5 +16,11 @@ public class MemberDAOImpl implements MemberDAO {
 		// TODO Auto-generated method stub
 		memberMapper.mInsert(memberVo);
 	}
+	
+	@Override
+	public MemberVO mdao_findById(String id) {
+		// TODO Auto-generated method stub
+		return memberMapper.mfindById(id);
+	}
 
 }

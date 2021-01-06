@@ -7,4 +7,9 @@
 	insert into spr_member(id, password, nickname, email, regdate, available, ismanager) values(#{id}, #{password}, #{nickname}, #{email}, now(), 1, 0)
 </insert>
 
+<!-- id중복확인 및 로그인체크, 상세보기 -->
+<select id="mfindById" resultType = "com.macssusa.model.MemberVO">
+	select * from spr_member where id=#{id}
+</select>
+
 </mapper>

@@ -2,6 +2,11 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.macssusa.mapper.BoardMapper">
 
+<!-- 게시글 번호 얻기(단순 auto-increment 속성이 아닌 게시글 수까지 파악가능) -->
+<select id="getNextNum" resultType="Integer">
+	SELECT IFNULL(MAX(bnum), 0) + 1 AS next_num FROM spr_board
+</select>
+
 <!-- 게시물 목록(검색제외) -->
 <select id="getBoardList_MacReview" resultType="com.macssusa.model.BoardVO">
 	select 
@@ -27,6 +32,24 @@
 	from spr_board
 	where btype=4 and available=1;
 </select>
+
+<!-- 게시글 작성 -->
+<insert id="writeBoard_MacReview">
+	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
+	values(#{bnum}, 1, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
+</insert>
+<insert id="writeBoard_AddonReview">
+	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
+	values(#{bnum}, 2, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
+</insert>
+<insert id="writeBoard_MacQuestion">
+	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
+	values(#{bnum}, 3, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
+</insert>
+<insert id="writeBoard_AddonQuestion">
+	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
+	values(#{bnum}, 4, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
+</insert>
   
 </mapper>
   

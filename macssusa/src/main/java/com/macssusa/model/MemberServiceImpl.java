@@ -15,4 +15,12 @@ public class MemberServiceImpl implements MemberService {
 		mdao.mdao_insert(memberVo);
 	}
 
+	@Override
+	public MemberVO findById(String id) {
+		// TODO Auto-generated method stub
+		return mdao.mdao_findById(id);
+	}
+	
+	
+
 }
