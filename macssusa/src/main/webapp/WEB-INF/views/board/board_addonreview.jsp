@@ -33,7 +33,7 @@
 </table>
 
 <c:if test="${!empty sessionScope.sessId }">
-	<a href="/board/board_addonreview_write">게시글작성</a>
+	<a href="/board/board_write?btype=2">게시글작성</a>
 </c:if>
 
 </body>

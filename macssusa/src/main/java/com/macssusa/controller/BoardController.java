@@ -52,7 +52,7 @@ public class BoardController {
 	}
 	
 	// 각 게시판 글쓰기 진입
-	
+	/*
 	@RequestMapping(value="/board_macreview_write", method=RequestMethod.GET)
 	public void getBoardWrite_MacReview(){
 	}
@@ -65,7 +65,50 @@ public class BoardController {
 	@RequestMapping(value="/board_addonquestion_write", method=RequestMethod.GET)
 	public void getBoardWrite_AddonQuestion(Model model) throws Exception {
 	}
+	*/
 	
+	@RequestMapping(value="/board_write", method=RequestMethod.GET)
+	public void getBoardWrite(){
+	}
+	
+	// 게시물 작성
+		@RequestMapping(value = "/board_write", method = RequestMethod.POST)
+		public String writeBoard(@ModelAttribute BoardVO boardVo, HttpSession session, HttpServletRequest request) throws UnknownHostException {
+			
+			// 새로 적용할 VO 만들기(기존의 VO는 일부 데이터가 빠져있으므로)
+			BoardVO newBoardVo = new BoardVO();
+			newBoardVo.setBnum(service.getNextNum());
+			newBoardVo.setTitle(boardVo.getTitle());
+			newBoardVo.setContent(boardVo.getContent());
+			newBoardVo.setMemberid((String)session.getAttribute("sessId"));
+			newBoardVo.setIp(Inet4Address.getLocalHost().getHostAddress());
+			newBoardVo.setFilename1(null);
+			newBoardVo.setFilename1(null);
+			newBoardVo.setFilename1(null);
+			newBoardVo.setFilename1(null);
+			newBoardVo.setFilename1(null);
+			
+			int type = Integer.parseInt(request.getParameter("btype"));
+			
+			System.out.println(type);
+			
+			if (type==1) {
+				service.writeBoard_MacReview(newBoardVo);
+				return "redirect:/board/board_macreview";
+			} else if (type==2) {
+				service.writeBoard_AddonReview(newBoardVo);
+				return "redirect:/board/board_addonreview";
+			} else if (type==3) {
+				service.writeBoard_MacQuestion(newBoardVo);
+				return "redirect:/board/board_macquestion";
+			} else {
+				service.writeBoard_AddonQuestion(newBoardVo);
+				return "redirect:/board/board_addonquestion";
+			}
+		}
+	
+	
+	/*
 	// 게시물 작성
 	@RequestMapping(value = "/board_macreview_write", method = RequestMethod.POST)
 	public String writeBoard_MacReview(@ModelAttribute BoardVO boardVo, HttpSession session) throws UnknownHostException {
@@ -143,6 +186,7 @@ public class BoardController {
 		service.writeBoard_AddonQuestion(newBoardVo);
 		return "redirect:/board/board_addonquestion";
 	}
+	*/
 	
 	
 }
