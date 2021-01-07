@@ -7,7 +7,7 @@
 	SELECT IFNULL(MAX(bnum), 0) + 1 AS next_num FROM spr_board
 </select>
 
-<!-- 게시물 목록(검색제외) -->
+<!-- 게시물 목록(기초) -->
 <select id="getBoardList" parameterType="Integer" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
@@ -16,6 +16,22 @@
 	order by bnum desc
 </select>
 
+<!-- 게시물 목록(페이징 추가) -->
+<select id="getBoardListPage" parameterType="hashMap" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=#{btype} and available=1
+	order by bnum desc
+	limit #{displayPost}, #{postNum}
+</select>
+
+<!-- 게시글 갯수 -->
+<select id="getBoardCount" parameterType="Integer" resultType="Integer">
+	select count(*) from spr_board where btype=#{btype} and available=1
+</select>
+
+<!-- 게시글 쓰기 -->
 <insert id="writeBoard">
 	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
 	values(#{bnum}, #{btype}, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
@@ -37,6 +53,6 @@
 <update id="deleteBoard" parameterType="Integer">
 	update spr_board set available=0 where bnum=#{bnum}
 </update>
-  
+
 </mapper>
   

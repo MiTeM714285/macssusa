@@ -4,23 +4,14 @@ import java.util.List;
 
 public interface BoardService {
 	
-	/*
-	public List<BoardVO> getBoardList_MacReview();
-	public List<BoardVO> getBoardList_AddonReview();
-	public List<BoardVO> getBoardList_MacQuestion();
-	public List<BoardVO> getBoardList_AddonQuestion();
-	*/ 
-	
+
 	public List<BoardVO> getBoardList(int btype);
+	public List<BoardVO> getBoardListPage(int btype, int displayPost, int postNum); // 게시글리스트(페이징 추가)
+	
+	public int getBoardCount(int btype);
 	
 	public int getNextNum();
-	
-	/*
-	public void writeBoard_MacReview(BoardVO boardVo);
-	public void writeBoard_AddonReview(BoardVO boardVo);
-	public void writeBoard_MacQuestion(BoardVO boardVo);
-	public void writeBoard_AddonQuestion(BoardVO boardVo);
-	*/
+
 	public void writeBoard(BoardVO boardVo);
 	
 	public BoardVO getBoardView(int bnum, int btype); 

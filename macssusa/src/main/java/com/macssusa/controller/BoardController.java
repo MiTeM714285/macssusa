@@ -1,7 +1,6 @@
 package com.macssusa.controller;
 
 import java.net.Inet4Address;
-import java.net.UnknownHostException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.macssusa.model.BoardService;
 import com.macssusa.model.BoardVO;
+import com.macssusa.model.Page;
 
 @Controller
 @RequestMapping("/board/*") // 게시판 쪽 디렉토리 매핑
@@ -29,9 +29,27 @@ public class BoardController {
 	@RequestMapping(value="/board", method=RequestMethod.GET)
 	public void getBoardList(@RequestParam("btype") int btype, Model model) throws Exception {
 		List<BoardVO> list = null;
-			list = service.getBoardList(btype);
-			model.addAttribute("list",list);
+		list = service.getBoardList(btype);
+		model.addAttribute("list",list);
 	}
+	
+	// 각 게시판 진입(페이징 추가)
+	@RequestMapping(value="/board_page", method=RequestMethod.GET)
+	public void getBoardListPage(@RequestParam("btype") int btype, @RequestParam("num") int num, Model model) throws Exception {
+
+		Page page = new Page();
+	
+		page.setNum(num);
+		page.setCount(service.getBoardCount(btype));  
+
+		List<BoardVO> list = null;
+		list = service.getBoardListPage(btype, page.getDisplayPost(), page.getPostNum());
+
+		model.addAttribute("list", list);   
+		model.addAttribute("page", page);
+		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
+	}
+	
 	
 	// 게시글 작성 진입
 	@RequestMapping(value = "/board_write", method = RequestMethod.GET)
