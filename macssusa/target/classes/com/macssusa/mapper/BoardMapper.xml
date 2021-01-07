@@ -8,47 +8,17 @@
 </select>
 
 <!-- 게시물 목록(검색제외) -->
-<select id="getBoardList_MacReview" resultType="com.macssusa.model.BoardVO">
+<select id="getBoardList" parameterType="Integer" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
 	from spr_board
-	where btype=1 and available=1;
-</select>
-<select id="getBoardList_AddonReview" resultType="com.macssusa.model.BoardVO">
-	select 
-	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
-	from spr_board
-	where btype=2 and available=1;
-</select>
-<select id="getBoardList_MacQuestion" resultType="com.macssusa.model.BoardVO">
-	select 
-	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
-	from spr_board
-	where btype=3 and available=1;
-</select>
-<select id="getBoardList_AddonQuestion" resultType="com.macssusa.model.BoardVO">
-	select 
-	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
-	from spr_board
-	where btype=4 and available=1;
+	where btype=#{btype} and available=1
+	order by bnum desc
 </select>
 
-<!-- 게시글 작성 -->
-<insert id="writeBoard_MacReview">
+<insert id="writeBoard">
 	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
-	values(#{bnum}, 1, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
-</insert>
-<insert id="writeBoard_AddonReview">
-	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
-	values(#{bnum}, 2, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
-</insert>
-<insert id="writeBoard_MacQuestion">
-	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
-	values(#{bnum}, 3, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
-</insert>
-<insert id="writeBoard_AddonQuestion">
-	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
-	values(#{bnum}, 4, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
+	values(#{bnum}, #{btype}, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
 </insert>
 
 <!-- 게시글 조회 -->

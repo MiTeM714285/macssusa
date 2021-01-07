@@ -13,20 +13,22 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public void insert(MemberVO memberVo) {
-		// TODO Auto-generated method stub
 		memberMapper.mInsert(memberVo);
 	}
 
 	@Override
 	public MemberVO findById(String id) {
-		// TODO Auto-generated method stub
 		return memberMapper.mfindById(id);
 	}
 
 	@Override
 	public void memberUpdate(MemberVO memberVo) {
-		// TODO Auto-generated method stub
 		memberMapper.mUpdate(memberVo);
+	}
+
+	@Override
+	public void memberDelete(String id) {
+		memberMapper.mDelete(id);
 	}
 	
 	

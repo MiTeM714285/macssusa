@@ -29,24 +29,19 @@ public class BoardController {
 	@RequestMapping(value="/board", method=RequestMethod.GET)
 	public void getBoardList(@RequestParam("btype") int btype, Model model) throws Exception {
 		List<BoardVO> list = null;
-		if (btype==1) {
-			list = service.getBoardList_MacReview();
+			list = service.getBoardList(btype);
 			model.addAttribute("list",list);
-		} else if (btype==2) {
-			list = service.getBoardList_AddonReview();
-			model.addAttribute("list",list);
-		} else if (btype==3) {
-			list = service.getBoardList_MacQuestion();
-			model.addAttribute("list",list);
-		} else {
-			list = service.getBoardList_AddonQuestion();
-			model.addAttribute("list",list);
-		}
+	}
+	
+	// 게시글 작성 진입
+	@RequestMapping(value = "/board_write", method = RequestMethod.GET)
+	public void getWrite() throws Exception {
+	
 	}
 	
 	// 게시글 작성
 		@RequestMapping(value = "/board_write", method = RequestMethod.POST)
-		public String writeBoard(@ModelAttribute BoardVO boardVo, HttpSession session, HttpServletRequest request) throws UnknownHostException {
+		public String writeBoard(@ModelAttribute BoardVO boardVo, HttpSession session, HttpServletRequest request) throws Exception {
 			
 			// 새로 적용할 VO 만들기(기존의 VO는 일부 데이터가 빠져있으므로)
 			BoardVO newBoardVo = new BoardVO();
@@ -62,20 +57,9 @@ public class BoardController {
 			newBoardVo.setFilename1(null);
 			
 			int type = Integer.parseInt(request.getParameter("btype")); // 게시판 종류가 어떤건지 파악하기위한
-			
-			if (type==1) {
-				service.writeBoard_MacReview(newBoardVo);
-				return "redirect:/board/board_macreview";
-			} else if (type==2) {
-				service.writeBoard_AddonReview(newBoardVo);
-				return "redirect:/board/board_addonreview";
-			} else if (type==3) {
-				service.writeBoard_MacQuestion(newBoardVo);
-				return "redirect:/board/board_macquestion";
-			} else {
-				service.writeBoard_AddonQuestion(newBoardVo);
-				return "redirect:/board/board_addonquestion";
-			}
+			newBoardVo.setBtype(type);
+			service.writeBoard(newBoardVo);
+			return "redirect:/board/board?btype="+type;
 		}
 		
 	// 게시글 조회

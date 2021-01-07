@@ -26,6 +26,7 @@
 			 </tbody>
 			</table>
 		<button type="submit">수정</button>
+		<a onclick="return confirm('정말로 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.')" href="/member/memberDelete">회원탈퇴</a>
 		<a href="/">뒤로</a>
 	</form>
 </body>

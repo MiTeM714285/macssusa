@@ -51,8 +51,11 @@ $("#loginBtn").click(function() {
 			alert("환영합니다");
 			location.href="/";
 		} else if(resp=="fail") { // ID 불일치 -> 회원가입화면으로
-			alert("회원이 아닙니다 회원가입 페이지로 안내합니다.");
-			location.href="/member/join";
+			alert("회원정보를 찾을 수 없습니다.");
+			location.href="/member/login";
+		} else if(resp="notAvailable") {
+			alert("탈퇴하였거나 관리자에 의해 차단되었습니다.");
+			location.href="/member/login";
 		} else { // ID 일치 비밀번호 불일치
 			alert("아이디 또는 비밀번호가 틀립니다");
 			$("#password").val("");
@@ -65,3 +68,4 @@ $("#loginBtn").click(function() {
 </script>
 </body>
 </html>
+

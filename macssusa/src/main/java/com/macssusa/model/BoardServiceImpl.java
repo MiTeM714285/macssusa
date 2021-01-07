@@ -13,6 +13,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardMapper mapper;
 	
+	/*
 	@Override
 	public List<BoardVO> getBoardList_MacReview(){
 		// TODO Auto-generated method stub
@@ -33,6 +34,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		return mapper.getBoardList_AddonQuestion();
 	}
+	*/
+	public List<BoardVO> getBoardList(int btype){
+		// TODO Auto-generated method stub
+		return mapper.getBoardList(btype);
+	}
+	
 	
 	@Override
 	public int getNextNum() {
@@ -40,6 +47,7 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getNextNum();
 	}
 	
+	/*
 	@Override
 	public void writeBoard_MacReview(BoardVO boardVo) {
 		// TODO Auto-generated method stub
@@ -60,7 +68,12 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		mapper.writeBoard_AddonQuestion(boardVo);
 	}
-	
+	*/
+	@Override
+	public void writeBoard(BoardVO boardVo) {
+		// TODO Auto-generated method stub
+		mapper.writeBoard(boardVo);
+	}
 	
 	@Override
 	public BoardVO getBoardView(int bnum, int btype) {

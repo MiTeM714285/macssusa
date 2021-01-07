@@ -48,6 +48,8 @@ public class MemberController {
 		MemberVO member = mService.findById(id);
 		if(member == null) { // 회원이 아닐경우
 			result = "fail";
+		} else if(member.getAvailable() == 0) {
+			result = "notAvailable"; // 탈퇴 및 관리자가 차단
 		} else if(member.getPassword().equals(password)) { // 회원일 경우
 			session.setAttribute("sessId", id); // 세션에 id 추가
 			result = "success";
@@ -77,5 +79,11 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
-
+	@GetMapping("memberDelete")
+	public String memberDelete(HttpSession session) {
+		String id = (String)session.getAttribute("sessId");
+		session.invalidate();
+		mService.memberDelete(id);
+		return "redirect:/";
+	}
 }
