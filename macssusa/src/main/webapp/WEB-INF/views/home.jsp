@@ -11,9 +11,9 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
-<p><a href="/board/board_macreview">맥 리뷰 임시 게시판 가기</a>
-<p><a href="/board/board_addonreview">주변기기 리뷰 임시 게시판 가기</a>
-<p><a href="/board/board_macquestion">맥 질문 임시 게시판 가기</a>
-<p><a href="/board/board_addonquestion">주변기기 질문 임시 게시판 가기</a>
+<p><a href="/board/board?btype=1">맥 리뷰 임시 게시판 가기</a>
+<p><a href="/board/board?btype=2">주변기기 리뷰 임시 게시판 가기</a>
+<p><a href="/board/board?btype=3">맥 질문 임시 게시판 가기</a>
+<p><a href="/board/board?btype=4">주변기기 질문 임시 게시판 가기</a>
 </body>
 </html>

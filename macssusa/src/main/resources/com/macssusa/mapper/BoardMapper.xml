@@ -50,6 +50,23 @@
 	insert into spr_board(bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5) 
 	values(#{bnum}, 4, #{title}, #{content}, #{memberid}, now(), 1, 0, 0, #{ip}, #{filename1}, #{filename2}, #{filename3}, #{filename4}, #{filename5})
 </insert>
+
+<!-- 게시글 조회 -->
+<select id="getBoardView" resultType="com.macssusa.model.BoardVO">
+	select * from spr_board where bnum=#{bnum} and btype=#{btype}
+</select>
+
+<!-- 게시글 수정 -->
+<update id="updateBoard" parameterType="com.macssusa.model.BoardVO">
+	update spr_board 
+	set title=#{title}, content=#{content}, filename1=#{filename1}, filename2=#{filename2}, filename3=#{filename3}, filename4=#{filename4}, filename5=#{filename5}
+	where bnum=#{bnum}
+</update>
+
+<!-- 게시글 삭제(유저 입장) -->
+<update id="deleteBoard" parameterType="Integer">
+	update spr_board set available=0 where bnum=#{bnum}
+</update>
   
 </mapper>
   

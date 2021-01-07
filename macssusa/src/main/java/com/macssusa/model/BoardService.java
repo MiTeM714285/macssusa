@@ -15,5 +15,11 @@ public interface BoardService {
 	public void writeBoard_AddonReview(BoardVO boardVo);
 	public void writeBoard_MacQuestion(BoardVO boardVo);
 	public void writeBoard_AddonQuestion(BoardVO boardVo);
+	
+	public BoardVO getBoardView(int bnum, int btype); 
+	
+	public void updateBoard(BoardVO boardVo);
+	
+	public void deleteBoard(int bnum);
 
 }

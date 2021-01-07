@@ -31,7 +31,7 @@
 	  	</c:when>
 	  	<c:otherwise>
 		    <li class="nav-item">
-		      <a class="nav-link" href="/member/view">회원변경</a>
+		      <a class="nav-link" href="/member/memberUpdate">회원변경</a>
 		    </li>
 		        <li class="nav-item">
 		      <a class="nav-link" href="/member/logout">로그아웃</a>
