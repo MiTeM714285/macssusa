@@ -50,6 +50,33 @@ public class BoardController {
 		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
 	}
 	
+	// 각 게시판 진입(페이징+검색 추가)
+	@RequestMapping(value="/board_page_search", method=RequestMethod.GET)
+	public void getBoardListPageSearch(@RequestParam("btype") int btype, @RequestParam("num") int num, Model model,
+			@RequestParam(value="searchType", required=false, defaultValue="title") String searchType,
+			@RequestParam(value="keyword", required=false, defaultValue="") String keyword) throws Exception {
+
+		Page page = new Page();
+	
+		page.setNum(num);
+		page.setCount(service.getBoardCountSearch(btype, searchType, keyword));
+		
+		// 검색 타입과 검색어 데이터
+		page.setSearchType(searchType);
+		page.setKeyword(keyword);
+
+		List<BoardVO> list = null;
+		list = service.getBoardListPageSearch(btype, page.getDisplayPost(), page.getPostNum(), searchType, keyword);
+
+		model.addAttribute("list", list);   
+		model.addAttribute("page", page);
+		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
+		
+		
+		//model.addAttribute("searchType", searchType);
+		//model.addAttribute("keyword", keyword);
+	}
+	
 	
 	// 게시글 작성 진입
 	@RequestMapping(value = "/board_write", method = RequestMethod.GET)

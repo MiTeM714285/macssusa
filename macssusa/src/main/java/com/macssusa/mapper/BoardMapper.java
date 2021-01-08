@@ -11,11 +11,15 @@ public interface BoardMapper {
 	
 	// 값이 2개이상일때는 @Param("변수명")사용
 
-	public List<BoardVO> getBoardList(int btype); // 게시글리스트(기초)
-	
-	public List<BoardVO> getBoardListPage(@Param("btype")int btype, @Param("displayPost")int displayPost, @Param("postNum")int postNum); // 게시글리스트(페이징 추가)
+	// 게시글리스트(기초)
+	public List<BoardVO> getBoardList(int btype);
+	// 게시글리스트(페이징 추가)
+	public List<BoardVO> getBoardListPage(@Param("btype")int btype, @Param("displayPost")int displayPost, @Param("postNum")int postNum); 
+	// 게시글리스트(페이징 추가)
+	public List<BoardVO> getBoardListPageSearch(@Param("btype")int btype, @Param("displayPost")int displayPost, @Param("postNum")int postNum, @Param("searchType")String searchType, @Param("keyword")String keyword); 
 	
 	public int getBoardCount(int btype);
+	public int getBoardCountSearch(@Param("btype")int btype, @Param("searchType")String searchType, @Param("keyword")String keyword);
 	
 	public int getNextNum();
 

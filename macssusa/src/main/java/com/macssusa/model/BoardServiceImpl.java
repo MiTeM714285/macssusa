@@ -22,10 +22,22 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.getBoardListPage(btype, displayPost, postNum);
 	}
 	@Override
+	public List<BoardVO> getBoardListPageSearch(int btype, int displayPost, int postNum, String searchType,
+			String keyword) {
+		return mapper.getBoardListPageSearch(btype, displayPost, postNum, searchType, keyword);
+	}
+	
+	@Override
 	public int getBoardCount(int btype) {
 		// TODO Auto-generated method stub
 		return mapper.getBoardCount(btype);
 	}
+	@Override
+	public int getBoardCountSearch(int btype, String searchType, String keyword) {
+		// TODO Auto-generated method stub
+		return mapper.getBoardCountSearch(btype, searchType, keyword);
+	}
+	
 	@Override
 	public int getNextNum() {
 		// TODO Auto-generated method stub
@@ -54,6 +66,8 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		mapper.deleteBoard(bnum);
 	}
+
+
 
 
 
