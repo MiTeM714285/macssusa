@@ -33,6 +33,25 @@ public class MemberController {
 		return "member/login";
 	}
 	
+	//ID중복체크 form으로
+	@GetMapping("idCheck")
+	public void idCheck() {
+	}
+	
+	// id 중복확인
+	@PostMapping("idCheck")
+	@ResponseBody
+	public String idCheck(String id) {
+		MemberVO member = mService.findById(id);
+		String result = "";
+		if (member == null) {
+			result = "success";
+		} else {
+			result = "fail";
+		}
+		return result; // @ResponseBody는 문자열을 return하게 해줌
+	}
+	
 	// 로그인페이지로 가기
 	@GetMapping("login")
 	public void login() {
