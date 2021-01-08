@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.macssusa.mapper.CommentMapper">
+
+<!-- 게시글 번호 얻기(단순 auto-increment 속성이 아닌 게시글 수까지 파악가능) -->
+<select id="getNextNum" resultType="Integer">
+	SELECT IFNULL(MAX(cnum), 0) + 1 AS next_num FROM spr_comment
+</select>
+
+<!-- 댓글 쓰기 -->
+<insert id="writeComment" parameterType="com.macssusa.model.CommentVO">
+	insert into spr_comment(cnum, content, regdate, memberid, bnum, available, ip) 
+	values(#{cnum},#{content},now(),#{memberid},#{bnum},1,#{ip})
+</insert>
+
+<!-- 댓글 목록 -->
+<select id="getCommentList" parameterType="Integer" resultType="com.macssusa.model.CommentVO">
+	select * from spr_comment
+	where bnum=#{bnum} and available=1
+	order by cnum desc
+</select>
+
+<!-- 댓글수 -->
+<select id="getCommentCount" parameterType="Integer" resultType="Integer">
+	select count(*) from spr_comment where bnum=#{bnum} and available=1
+</select>
+
+<!-- 한 댓글 가져오기 -->
+<select id="getCommentByCnum" parameterType="Integer" resultType="com.macssusa.model.CommentVO">
+	select * from spr_comment where cnum=#{cnum}
+</select>
+
+<!-- 게시글 삭제(유저 입장) -->
+<update id="deleteComment" parameterType="Integer">
+	update spr_comment set available=0 where cnum=#{cnum}
+</update>
+
+
+</mapper>
+  

@@ -23,5 +23,11 @@ public interface BoardService {
 	public void updateBoard(BoardVO boardVo);
 	
 	public void deleteBoard(int bnum);
+	
+	public void hitcountUp(int bnum);
+	
+	// 댓글수 조작
+	public void replyCountUp(int bnum);
+	public void replyCountDown(int bnum);
 
 }

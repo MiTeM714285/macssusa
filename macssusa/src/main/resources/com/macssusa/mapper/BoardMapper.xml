@@ -100,5 +100,18 @@
 	update spr_board set available=0 where bnum=#{bnum}
 </update>
 
+<!-- 조회수1증가 -->
+<update id="hitcountUp" parameterType="Integer">
+	update spr_board set hitcount=hitcount+1 where bnum=#{bnum}
+</update>
+
+<update id="replyCountUp" parameterType="Integer">
+	update spr_board set replycnt=replycnt+1 where bnum=#{bnum}
+</update>
+
+<update id="replyCountDown" parameterType="Integer">
+	update spr_board set replycnt=replycnt-1 where bnum=#{bnum}
+</update>
+
 </mapper>
   

@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.macssusa.model.BoardService;
 import com.macssusa.model.BoardVO;
+import com.macssusa.model.CommentService;
+import com.macssusa.model.CommentVO;
 import com.macssusa.model.Page;
 
 @Controller
@@ -24,6 +26,9 @@ public class BoardController {
 	
 	@Autowired
 	BoardService service;
+	
+	@Autowired
+	CommentService commentService;
 	
 	// 각 게시판 진입
 	@RequestMapping(value="/board", method=RequestMethod.GET)
@@ -71,10 +76,6 @@ public class BoardController {
 		model.addAttribute("list", list);   
 		model.addAttribute("page", page);
 		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
-		
-		
-		//model.addAttribute("searchType", searchType);
-		//model.addAttribute("keyword", keyword);
 	}
 	
 	
@@ -109,9 +110,24 @@ public class BoardController {
 		
 	// 게시글 조회
 	@RequestMapping(value="/board_view", method=RequestMethod.GET)
-	public void getBoardView(int bnum, int btype, Model model) throws Exception {
+	public void getBoardView(int bnum, int btype, Model model, HttpSession session) throws Exception {
 		BoardVO boardVo = service.getBoardView(bnum, btype);
 		model.addAttribute("view",boardVo);
+		
+		// 조회수1증가 (로그인상태에서 자신의글에 조회할시 조회수는 올라가지 않음)
+		String sessId = null;
+		if ((String)session.getAttribute("sessId") != null) {
+			sessId = (String)session.getAttribute("sessId");
+		}
+		String memberId = boardVo.getMemberid();
+		if (sessId == null || (sessId != null && !memberId.equals(sessId))) {
+			service.hitcountUp(bnum);
+		}
+		
+		// 댓글 조회
+		List<CommentVO> comment = null;
+		comment = commentService.getCommentList(bnum);
+		model.addAttribute("comment", comment);
 	}
 	
 	// 게시글 수정 진입

@@ -37,7 +37,7 @@
 	<c:forEach items="${list}" var="list">
 	 <tr>
 	  <td>${list.bnum}</td>
-	  <td><a href="/board/board_view?bnum=${list.bnum}&btype=${list.btype}">${list.title}</a></td>
+	  <td><a href="/board/board_view?bnum=${list.bnum}&btype=${list.btype}">${list.title}</a><c:if test="${list.replycnt != 0}">[${list.replycnt}]</c:if></td>
 	  <td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
 	  <td>${list.memberid}</td>
 	  <td>${list.hitcount}</td>

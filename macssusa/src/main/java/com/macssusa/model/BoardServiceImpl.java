@@ -66,13 +66,16 @@ public class BoardServiceImpl implements BoardService {
 		// TODO Auto-generated method stub
 		mapper.deleteBoard(bnum);
 	}
-
-
-
-
-
-	
-	
-
-
+	@Override
+	public void hitcountUp(int bnum) {
+		mapper.hitcountUp(bnum);
+	}
+	@Override
+	public void replyCountUp(int bnum) {
+		mapper.replyCountUp(bnum);
+	}
+	@Override
+	public void replyCountDown(int bnum) {
+		mapper.replyCountDown(bnum);
+	}
 }

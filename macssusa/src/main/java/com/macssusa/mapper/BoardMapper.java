@@ -31,5 +31,11 @@ public interface BoardMapper {
 	
 	public void deleteBoard(int bnum);
 	
+	// 조회수1증가
+	public void hitcountUp(int bnum);
+	
+	// 댓글수 조작
+	public void replyCountUp(int bnum);
+	public void replyCountDown(int bnum);
 	
 }
