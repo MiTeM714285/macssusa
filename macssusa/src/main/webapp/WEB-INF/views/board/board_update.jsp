@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@include file="../include/header.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
 		<textarea cols="50" rows="5" name="content" >${view.content }</textarea><br />
 		
 		<button type="submit">완료</button>
-		<a href="/board/board_view?bnum=${param.bnum }&btype=${param.btype }">뒤로</a>
+		<a onclick="return confirm('수정을 취소하시겠습니까?')" href="/board/board_view?bnum=${param.bnum }&btype=${param.btype }">뒤로</a>
 	</form>
 </body>
 </html>

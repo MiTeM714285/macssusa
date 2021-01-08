@@ -2,6 +2,8 @@ package com.macssusa.model;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -17,6 +19,11 @@ public class BoardVO {
 	private int hitcount;
 	private int replycnt;
 	private String ip;
+	private MultipartFile uploadFile1; 
+	private MultipartFile uploadFile2; 
+	private MultipartFile uploadFile3; 
+	private MultipartFile uploadFile4; 
+	private MultipartFile uploadFile5; 
 	private String filename1;
 	private String filename2;
 	private String filename3;
