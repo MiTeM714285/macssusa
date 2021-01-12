@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,8 +18,7 @@
 	
 	<label>내용</label>
 	<textarea cols="50" rows="5" name="content"></textarea><br />
-	
-	
+
 	
 	<label for="file">파일1</label><input type="file" id="uploadFile1" name="uploadFile1"><br>
 	<label for="file">파일2</label><input type="file" id="uploadFile2" name="uploadFile2"><br>
