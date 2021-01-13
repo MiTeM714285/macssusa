@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartRequest;
 
 import com.macssusa.model.BoardService;
 import com.macssusa.model.BoardVO;
 import com.macssusa.model.CommentService;
 import com.macssusa.model.CommentVO;
+import com.macssusa.model.MemberService;
 import com.macssusa.model.Page;
 
 @Controller
@@ -31,7 +31,8 @@ public class BoardController {
 	
 	@Autowired
 	BoardService service;
-	
+	@Autowired
+	MemberService memberService;
 	@Autowired
 	CommentService commentService;
 	
@@ -180,6 +181,8 @@ public class BoardController {
 		model.addAttribute("comment", comment);
 	}
 	
+	
+	
 	// 게시글 수정 진입
 	@RequestMapping(value="/board_update", method=RequestMethod.GET)
 	public void getModify(int bnum, int btype, Model model) throws Exception {
@@ -325,4 +328,47 @@ public class BoardController {
 		service.deleteBoard(bnum);
 		return "redirect:/board/board_page_search?num=1&btype="+btype;
 	}
+	
+	// 삭제된 게시글 보기
+	@RequestMapping(value="/deletedBoardList", method=RequestMethod.GET)
+	public void getDeletedBoardList(Model model) throws Exception {
+		List<BoardVO> list = null;
+		list = service.getDeletedBoardList();
+
+		model.addAttribute("list", list);   
+	}
+	
+	@RequestMapping(value="/deletedBoardCheck", method=RequestMethod.GET)
+	public void getDeletedBoardView(int bnum, int btype, Model model, HttpSession session) throws Exception {
+		BoardVO boardVo = service.getBoardView(bnum, btype);
+		model.addAttribute("view",boardVo);
+		
+		// 댓글 조회
+		List<CommentVO> comment = null;
+		comment = commentService.getCommentList(bnum);
+		model.addAttribute("comment", comment);
+	}
+	
+	// 삭제된 댓글 보기
+	@RequestMapping(value="/deletedCommentList", method=RequestMethod.GET)
+	public void getDeletedCommentList(Model model) {
+		List<CommentVO> list = null;
+		list = commentService.getDeletedCommentList();
+
+		model.addAttribute("list", list);   
+	}
+	
+	// 게시글 완전삭제(관리자전용)
+	@RequestMapping(value="/completelyDeleteBoard", method=RequestMethod.GET)
+	public String completelyDeleteBoard(@RequestParam("bnum") int bnum) throws Exception {
+		service.completelyDeleteByBnum(bnum);
+		return "redirect:/board/deletedBoardList";
+	}
+	// 댓글 완전삭제(관리자전용)
+	@RequestMapping(value="/completelyDeleteComment", method=RequestMethod.GET)
+	public String completelyDeleteComment(@RequestParam("cnum") int cnum) throws Exception {
+		commentService.completelyDeleteByCnum(cnum);
+		return "redirect:/board/deletedCommentList";
+	}
+	
 }

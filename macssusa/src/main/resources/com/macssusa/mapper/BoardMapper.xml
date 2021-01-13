@@ -113,5 +113,20 @@
 	update spr_board set replycnt=replycnt-1 where bnum=#{bnum}
 </update>
 
+<!-- 게시글 목록(유저가 삭제한) (관리자기능) -->
+<select id="getDeletedBoardList" parameterType="Integer" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where available=0
+	order by bnum desc
+</select>
+
+<!-- 완전삭제(관리자기능) -->
+<delete id="completelyDeleteByBnum" parameterType="Integer">
+	delete from spr_board where bnum=#{bnum}
+</delete>
+
+
 </mapper>
   

@@ -51,6 +51,17 @@ public class CommentServiceImpl implements CommentService {
 		return commentMapper.getCommentCount(bnum);
 	}
 
+	@Override
+	public void completelyDeleteByCnum(int cnum) {
+		// TODO Auto-generated method stub
+		commentMapper.completelyDeleteByCnum(cnum);
+	}
+
+	@Override
+	public List<CommentVO> getDeletedCommentList() {
+		return commentMapper.getDeletedCommentList();
+	}
+
 
 	
 	

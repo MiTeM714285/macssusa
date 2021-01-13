@@ -3,7 +3,6 @@ package com.macssusa.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.macssusa.model.BoardVO;
 
@@ -37,5 +36,8 @@ public interface BoardMapper {
 	// 댓글수 조작
 	public void replyCountUp(int bnum);
 	public void replyCountDown(int bnum);
+	
+	public List<BoardVO> getDeletedBoardList();
+	public void completelyDeleteByBnum(int bnum);
 	
 }

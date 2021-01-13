@@ -24,4 +24,7 @@ public interface CommentMapper {
 	public void deleteComment(int cnum) throws Exception;
 	
 	public int getNextNum();
+	
+	public List<CommentVO> getDeletedCommentList();
+	public void completelyDeleteByCnum(int cnum);
 }

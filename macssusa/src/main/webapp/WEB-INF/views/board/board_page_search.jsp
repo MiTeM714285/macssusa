@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="../include/header.jsp"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="com.macssusa.model.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,9 @@
 <title>insert title here</title>
 </head>
 <body>
+<%
+	MemberService memberService;
+%>
 <c:choose>
 	<c:when test="${param.btype == 1 }">
 		<h2>맥 리뷰 임시게시판</h2>

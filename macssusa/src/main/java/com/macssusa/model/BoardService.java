@@ -2,8 +2,6 @@ package com.macssusa.model;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
-
 public interface BoardService {
 	
 
@@ -30,4 +28,6 @@ public interface BoardService {
 	public void replyCountUp(int bnum);
 	public void replyCountDown(int bnum);
 
+	public List<BoardVO> getDeletedBoardList();
+	public void completelyDeleteByBnum(int bnum);
 }

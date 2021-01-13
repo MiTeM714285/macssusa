@@ -35,6 +35,14 @@
 	update spr_comment set available=0 where cnum=#{cnum}
 </update>
 
+<!-- 유저가 삭제한 댓글 목록 (관리자기능) -->
+<select id="getDeletedCommentList" resultType="com.macssusa.model.CommentVO">
+	select * from spr_comment where available=0 order by cnum desc
+</select>
 
+<!-- 완전삭제(관리자기능) -->
+<delete id="completelyDeleteByCnum" parameterType="Integer">
+	delete from spr_comment where cnum=#{cnum}
+</delete>
 </mapper>
   

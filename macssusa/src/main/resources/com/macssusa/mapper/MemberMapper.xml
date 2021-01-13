@@ -22,4 +22,34 @@
 	update spr_member set available=0 where id=#{id}
 </update>
 
+<!-- 관리자 계정 생성 -->
+<insert id="adminCreation">
+	insert into spr_member(id, password, nickname, email, regdate, available, ismanager) values('admin','admin','관리자','mitem714285@naver.com',now(),1,1)
+</insert>
+
+<!-- 관리자 계정이 존재하는지 확인 -->
+<select id="isAdminExist" resultType = "Integer">
+	select count(*) from spr_member where ismanager= 1
+</select>
+
+<!-- 멤버리스트 보기(관리자기능) -->
+<select id="getMemberList" resultType="com.macssusa.model.MemberVO">
+	select * from spr_member where ismanager=0 order by id desc
+</select>
+
+<!-- 회원 재활성화 -->
+<update id="enableMember" parameterType="string">
+	update spr_member set available=1 where id=#{id}
+</update>
+
+<!-- 완전삭제(관리자기능) -->
+<delete id="completelyDeleteById" parameterType="string">
+	delete from spr_member where id=#{id}
+</delete>
+
+<!-- id로 닉네임찾기 -->
+<select id="getNicknameById" parameterType="String" resultType="String">
+	select nickname from spr_member where id=#{id}
+</select>
+
 </mapper>

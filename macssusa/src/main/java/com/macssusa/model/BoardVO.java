@@ -13,7 +13,7 @@ public class BoardVO {
 	private int btype;
 	private String title; 
 	private String content;
-	private String memberid;
+	private String memberid;	
 	private Timestamp regdate;
 	private int available;
 	private int hitcount;
@@ -29,5 +29,4 @@ public class BoardVO {
 	private String filename3;
 	private String filename4;
 	private String filename5;
-
 }

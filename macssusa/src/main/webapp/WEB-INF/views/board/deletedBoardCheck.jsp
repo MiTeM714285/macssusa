@@ -25,16 +25,6 @@
 	<c:if test="${!empty view.filename3 }"><img src="/resources/img/${view.filename3 }" width=400 height=200 /><br></c:if>
 	<c:if test="${!empty view.filename4 }"><img src="/resources/img/${view.filename4 }" width=400 height=200 /><br></c:if>
 	<c:if test="${!empty view.filename5 }"><img src="/resources/img/${view.filename5 }" width=400 height=200 /><br></c:if>
-	
-	<c:if test="${!empty sessionScope.sessId && sessionScope.sessId == view.memberid}">
-		<a href="/board/board_update?bnum=${view.bnum }&btype=${param.btype}">수정</a>
-		<a onclick="return confirm('게시글을 삭제하시겠습니까?')" href="/board/board_delete?bnum=${view.bnum }&btype=${param.btype}">삭제</a>
-	</c:if>
-	<c:if test="${!empty sessionScope.sessId && sessionScope.isAdmin == true }">
-		<a onclick="return confirm('게시글을 삭제하시겠습니까?')" href="/board/board_delete?bnum=${view.bnum }&btype=${param.btype}">삭제</a>
-	</c:if>
-	<a href="/board/board?btype=${param.btype }">목록으로</a>
-	
 <hr>
 
 <ul>
@@ -47,20 +37,11 @@
     </li>
  </c:forEach>
 </ul>
-<c:if test="${!empty sessionScope.sessId }">
-<div>
-    <form method="post" action="/comment/writeComment">
-        <p>
-            <textarea rows="5" cols="50" name="content"></textarea>
-        </p>
-        <p>
-        	<input type="hidden" name="bnum" value="${view.bnum }">
-        	<input type="hidden" name="btype" value="${param.btype }">
-            <button type="submit">댓글 작성</button>
-        </p>
-    </form>
-</div>
-</c:if>
-	
+<input type="button" value="닫기" onclick="closeButton()">
+<script>
+	function closeButton() {
+		close();
+	}
+</script>
 </body>
 </html>

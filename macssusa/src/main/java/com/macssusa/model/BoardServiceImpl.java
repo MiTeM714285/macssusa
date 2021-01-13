@@ -78,4 +78,13 @@ public class BoardServiceImpl implements BoardService {
 	public void replyCountDown(int bnum) {
 		mapper.replyCountDown(bnum);
 	}
+	@Override
+	public void completelyDeleteByBnum(int bnum) {
+		// TODO Auto-generated method stub
+		mapper.completelyDeleteByBnum(bnum);
+	}
+	@Override
+	public List<BoardVO> getDeletedBoardList() {
+		return mapper.getDeletedBoardList();
+	}
 }

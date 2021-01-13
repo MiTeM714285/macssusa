@@ -16,5 +16,7 @@
 <p><a href="/board/board_page_search?num=1&btype=3">맥 질문 임시 게시판 가기</a>
 <p><a href="/board/board_page_search?num=1&btype=4">주변기기 질문 임시 게시판 가기</a>
 
+
+
 </body>
 </html>

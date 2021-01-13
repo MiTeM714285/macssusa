@@ -36,6 +36,17 @@
 		        <li class="nav-item">
 		      <a class="nav-link" href="/member/logout">로그아웃</a>
 		    </li>
+		    <c:if test="${sessionScope.isAdmin == true }">
+			    <li class="nav-item">
+			      <a class="nav-link" href="/member/memberList">회원관리</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" href="/board/deletedBoardList">삭제된 게시글 관리</a>
+			    </li>
+			    <li class="nav-item">
+			      <a class="nav-link" href="/board/deletedCommentList">삭제된 댓글 관리</a>
+			    </li>
+		    </c:if>
 	  	</c:otherwise>
 	  </c:choose>
   </ul>
