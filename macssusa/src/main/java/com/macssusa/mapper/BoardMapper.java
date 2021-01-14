@@ -12,6 +12,8 @@ public interface BoardMapper {
 
 	// 게시글리스트(기초)
 	public List<BoardVO> getBoardList(int btype);
+	// 게시글리스트(최신글 5개)
+	public List<BoardVO> getRecentBoardList(int btype);
 	// 게시글리스트(페이징 추가)
 	public List<BoardVO> getBoardListPage(@Param("btype")int btype, @Param("displayPost")int displayPost, @Param("postNum")int postNum); 
 	// 게시글리스트(페이징 추가)

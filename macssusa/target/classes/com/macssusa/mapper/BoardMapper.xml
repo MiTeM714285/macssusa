@@ -2,6 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.macssusa.mapper.BoardMapper">
 
+<resultMap type ="com.macssusa.model.BoardVO" id="ResultMap">
+	<id property="memberid" column="memberid" />
+	<collection property="nickname" column="memberid" select="getNicknameById" />
+</resultMap>
+
+<!-- id로 닉네임찾기 -->
+<select id="getNicknameById" parameterType="String" resultType="String">
+	select nickname from spr_member where id=#{memberid}
+</select>
+
+
 <!-- 게시글 번호 얻기(단순 auto-increment 속성이 아닌 게시글 수까지 파악가능) -->
 <select id="getNextNum" resultType="Integer">
 	SELECT IFNULL(MAX(bnum), 0) + 1 AS next_num FROM spr_board
@@ -16,6 +27,16 @@
 	order by bnum desc
 </select>
 
+<!-- 게시글 목록(메인 최신글) -->
+<select id="getRecentBoardList" parameterType="Integer" resultType="com.macssusa.model.BoardVO">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+	where btype=#{btype} and available=1
+	order by bnum desc
+	limit 5
+</select>
+
 <!-- 게시글 목록(페이징 추가) -->
 <select id="getBoardListPage" parameterType="hashMap" resultType="com.macssusa.model.BoardVO">
 	select 
@@ -27,6 +48,29 @@
 </select>
 
 <!-- 게시글 목록(페이징+검색 추가) -->
+<select id="getBoardListPageSearch" parameterType="hashMap" resultMap="ResultMap">
+	select 
+	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
+	from spr_board
+ <if test='searchType.equals("title")'>
+  WHERE title LIKE concat('%', #{keyword}, '%')
+ </if>
+ <if test='searchType.equals("content")'>
+  WHERE content LIKE concat('%', #{keyword}, '%')
+ </if>
+ <if test='searchType.equals("title_content")'>
+  WHERE title LIKE concat('%', #{keyword}, '%') 
+   or content LIKE concat('%', #{keyword}, '%')
+ </if>
+ <if test='searchType.equals("writer")'>
+  WHERE writer LIKE concat('%', #{keyword}, '%')
+ </if>
+ 	and btype=#{btype} and available=1
+	order by bnum desc
+	limit #{displayPost}, #{postNum}
+</select>
+
+<!-- 게시글 목록(페이징+검색 추가) 
 <select id="getBoardListPageSearch" parameterType="hashMap" resultType="com.macssusa.model.BoardVO">
 	select 
 	bnum, btype, title, content, memberid, regdate, available, hitcount, replycnt, ip, filename1, filename2, filename3, filename4, filename5
@@ -48,6 +92,7 @@
 	order by bnum desc
 	limit #{displayPost}, #{postNum}
 </select> 
+-->
 
 <!-- 게시글 갯수 -->
 <select id="getBoardCount" parameterType="Integer" resultType="Integer">
@@ -84,7 +129,7 @@
 </insert>
 
 <!-- 게시글 조회 -->
-<select id="getBoardView" resultType="com.macssusa.model.BoardVO">
+<select id="getBoardView" resultMap="ResultMap">
 	select * from spr_board where bnum=#{bnum} and btype=#{btype}
 </select>
 

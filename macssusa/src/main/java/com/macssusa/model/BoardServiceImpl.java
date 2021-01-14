@@ -14,8 +14,11 @@ public class BoardServiceImpl implements BoardService {
 	private BoardMapper mapper;
 
 	public List<BoardVO> getBoardList(int btype){
-		// TODO Auto-generated method stub
 		return mapper.getBoardList(btype);
+	}
+	@Override
+	public List<BoardVO> getRecentBoardList(int btype) {
+		return mapper.getRecentBoardList(btype);
 	}
 	@Override
 	public List<BoardVO> getBoardListPage(int btype, int displayPost, int postNum) {
@@ -26,7 +29,6 @@ public class BoardServiceImpl implements BoardService {
 			String keyword) {
 		return mapper.getBoardListPageSearch(btype, displayPost, postNum, searchType, keyword);
 	}
-	
 	@Override
 	public int getBoardCount(int btype) {
 		// TODO Auto-generated method stub
@@ -87,4 +89,5 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> getDeletedBoardList() {
 		return mapper.getDeletedBoardList();
 	}
+
 }

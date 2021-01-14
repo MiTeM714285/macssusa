@@ -79,9 +79,11 @@ public class BoardController {
 		List<BoardVO> list = null;
 		list = service.getBoardListPageSearch(btype, page.getDisplayPost(), page.getPostNum(), searchType, keyword);
 
-		model.addAttribute("list", list);   
+		model.addAttribute("list", list);
 		model.addAttribute("page", page);
 		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
+		
+		System.out.println(list);
 	}
 	
 	
@@ -156,7 +158,7 @@ public class BoardController {
 			int type = Integer.parseInt(request.getParameter("btype")); // 게시판 종류가 어떤건지 파악하기위한
 			newBoardVo.setBtype(type);
 			service.writeBoard(newBoardVo);
-			return "redirect:/board/board_page_search?num=1&btype="+type;
+			return "redirect:/board/board_view?num=1&bnum="+newBoardVo.getBnum()+"&btype="+type;
 		}
 		
 	// 게시글 조회
@@ -192,7 +194,7 @@ public class BoardController {
 	
 	// 게시글 수정
 	@RequestMapping(value="/board_update", method=RequestMethod.POST)
-	public String updateBoard(BoardVO boardVo, HttpSession session, HttpServletRequest request) throws Exception {
+	public String updateBoard(int num, BoardVO boardVo, HttpSession session, HttpServletRequest request) throws Exception {
 		
 		/*
 			지우지 않고 그대로 올릴경우 
@@ -319,7 +321,7 @@ public class BoardController {
 					newBoardVo.setBtype(type);
 					*/
 		service.updateBoard(newBoardVo);
-		return "redirect:/board/board_view?bnum="+boardVo.getBnum()+"&btype="+boardVo.getBtype();
+		return "redirect:/board/board_view?num=" + num + "&bnum="+boardVo.getBnum()+"&btype="+boardVo.getBtype();
 	}
 	
 	// 게시글 삭제
@@ -358,6 +360,15 @@ public class BoardController {
 		model.addAttribute("list", list);   
 	}
 	
+	
+	// 삭제된 댓글 내용 보기
+	@RequestMapping(value="/deletedCommentCheck", method=RequestMethod.GET)
+	public void getDeletedCommentView(int cnum, Model model) throws Exception {
+		CommentVO commentVo = commentService.getCommentByCnum(cnum);
+		System.out.println(commentVo.getMemberid());
+		model.addAttribute("view",commentVo);
+	}
+	
 	// 게시글 완전삭제(관리자전용)
 	@RequestMapping(value="/completelyDeleteBoard", method=RequestMethod.GET)
 	public String completelyDeleteBoard(@RequestParam("bnum") int bnum) throws Exception {
@@ -370,5 +381,4 @@ public class BoardController {
 		commentService.completelyDeleteByCnum(cnum);
 		return "redirect:/board/deletedCommentList";
 	}
-	
 }

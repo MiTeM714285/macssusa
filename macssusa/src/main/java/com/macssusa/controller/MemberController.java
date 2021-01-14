@@ -82,6 +82,7 @@ public class MemberController {
 			}
 			session.setAttribute("sessId", id); // 세션에 id 추가
 			session.setAttribute("isAdmin", isAdmin); // 세션에 관리자 판단 추가
+			session.setAttribute("nickName", member.getNickname()); // 세션에 관리자 판단 추가
 			result = "success";
 		} else { // 비밀번호 불일치
 			result = "passfail";

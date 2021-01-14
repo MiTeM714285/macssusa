@@ -15,9 +15,8 @@
 <title>jsp 게시판 웹사이트</title>
 </head>
 <body>
-
-<h3>회원관리</h3>
 	<div class="container">
+	<h3>회원관리</h3>
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>

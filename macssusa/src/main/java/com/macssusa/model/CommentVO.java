@@ -1,6 +1,7 @@
 package com.macssusa.model;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
@@ -14,4 +15,8 @@ public class CommentVO {
 	private int bnum;
 	private int available;
 	private String ip;
+	
+	private List<String> title;
+	private List<Integer> btype;
+	private List<Integer> boardAvailable;
 }

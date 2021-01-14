@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@include file="../include/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
@@ -26,13 +25,12 @@
 	<c:if test="${!empty view.filename4 }"><img src="/resources/img/${view.filename4 }" width=400 height=200 /><br></c:if>
 	<c:if test="${!empty view.filename5 }"><img src="/resources/img/${view.filename5 }" width=400 height=200 /><br></c:if>
 <hr>
-
 <ul>
  <c:forEach items="${comment }" var="comment">
  	<li>
         <div>
-            <p>${comment.memberid } / <fmt:formatDate value="${comment.regdate}" pattern="yyyy-MM-dd" /> <c:if test="${ sessionScope.sessId == comment.memberid || sessionScope.isAdmin == true}"><a onclick="return confirm('댓글을 삭제하시겠습니까?')" href="/comment/comment_delete?cnum=${comment.cnum }&bnum=${view.bnum }&btype=${param.btype}">삭제하기</a></c:if></p>
-            <p>${comment.content }</p>
+            <p>${comment.memberid } / <fmt:formatDate value="${comment.regdate}" pattern="yyyy-MM-dd" /></p>
+            <textarea rows="5" cols="50" style="width: 100%; height: 88px; resize: none; outline: none; border: 0px solid #dddddd" readonly="readonly" maxlength="512" name="content">${comment.content }</textarea>
         </div>
     </li>
  </c:forEach>

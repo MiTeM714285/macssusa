@@ -11,13 +11,12 @@
 <meta name="viewport" content="width=device-width">
 <!-- 스타일시트 참조  -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- jQuery 선언 -->
-
+<meta charset="UTF-8">
 <title>jsp 게시판 웹사이트</title>
 </head>
 <body>
-
-<h3>회원관리</h3>
 	<div class="container">
+	<h3>삭제된 게시글 관리</h3>
 		<div class="row">
 			<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 				<thead>
@@ -25,7 +24,7 @@
 						<th style="background-color: #eeeeee; text-align: center;">번호</th>
 						<th style="background-color: #eeeeee; text-align: center;">게시판 타입</th>
 						<th style="background-color: #eeeeee; text-align: center;">제목</th>
-						<th style="background-color: #eeeeee; text-align: center;">작성자</th>
+						<th style="background-color: #eeeeee; text-align: center;">작성자 ID</th>
 						<th style="background-color: #eeeeee; text-align: center;">작성일</th>
 						<th style="background-color: #eeeeee; text-align: center;">IP주소</th>
 						<th style="background-color: #eeeeee; text-align: center;">실행버튼(신중히 선택)</th>
@@ -43,7 +42,7 @@
 							<c:otherwise>주변기기 질문 게시판</c:otherwise>
 						</c:choose>
 					  </td>
-					  <td><a href="deletedBoardCheck?bnum=${list.bnum}&btype=${list.btype}" onclick="window.open(this.href,'_blank','width=600, height=400'); return false">${list.title}</a></td>
+					  <td><a href="deletedBoardCheck?bnum=${list.bnum}&btype=${list.btype}" onclick="window.open(this.href,'_blank','width=600, height=400'); return false">${list.title}</a><c:if test="${list.replycnt != 0}"> <span class="badge">${list.replycnt}</span></c:if></td>
 					  <td>${list.memberid}</td>
 					  <td><fmt:formatDate value="${list.regdate}" pattern="yyyy-MM-dd" /></td>
 					  <td>${list.ip}</td>

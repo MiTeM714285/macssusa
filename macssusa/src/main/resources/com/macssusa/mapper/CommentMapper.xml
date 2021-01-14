@@ -2,6 +2,28 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.macssusa.mapper.CommentMapper">
 
+<resultMap type ="com.macssusa.model.CommentVO" id="ResultMap">
+	<id property="bnum" column="bnum" />
+	<collection property="title" column="bnum" select="getTitleByBnum" />
+	<collection property="btype" column="bnum" select="getBtypeByBnum" />
+	<collection property="boardAvailable" column="bnum" select="getAvailableByBnum" />
+</resultMap>
+
+<!-- bnum로 게시글제목 찾기 -->
+<select id="getTitleByBnum" parameterType="Integer" resultType="String">
+	select title from spr_board where bnum=#{bnum}
+</select>
+
+<!-- bnum로 게시글타입 찾기 -->
+<select id="getBtypeByBnum" parameterType="Integer" resultType="Integer">
+	select btype from spr_board where bnum=#{bnum}
+</select>
+
+<!-- bnum로 Available찾기 -->
+<select id="getAvailableByBnum" parameterType="Integer" resultType="Integer">
+	select available from spr_board where bnum=#{bnum}
+</select>
+
 <!-- 게시글 번호 얻기(단순 auto-increment 속성이 아닌 게시글 수까지 파악가능) -->
 <select id="getNextNum" resultType="Integer">
 	SELECT IFNULL(MAX(cnum), 0) + 1 AS next_num FROM spr_comment
@@ -26,7 +48,7 @@
 </select>
 
 <!-- 한 댓글 가져오기 -->
-<select id="getCommentByCnum" parameterType="Integer" resultType="com.macssusa.model.CommentVO">
+<select id="getCommentByCnum" parameterType="Integer" resultMap="ResultMap">
 	select * from spr_comment where cnum=#{cnum}
 </select>
 
@@ -36,7 +58,7 @@
 </update>
 
 <!-- 유저가 삭제한 댓글 목록 (관리자기능) -->
-<select id="getDeletedCommentList" resultType="com.macssusa.model.CommentVO">
+<select id="getDeletedCommentList" resultMap="ResultMap">
 	select * from spr_comment where available=0 order by cnum desc
 </select>
 

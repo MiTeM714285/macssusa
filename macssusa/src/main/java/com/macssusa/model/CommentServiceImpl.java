@@ -25,8 +25,7 @@ public class CommentServiceImpl implements CommentService {
 	
 	@Override
 	public CommentVO getCommentByCnum(int cnum) throws Exception {
-		commentMapper.getCommentByCnum(cnum);
-		return null;
+		return commentMapper.getCommentByCnum(cnum);
 	}
 
 	@Override

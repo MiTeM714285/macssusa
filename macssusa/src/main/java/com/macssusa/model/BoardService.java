@@ -6,6 +6,7 @@ public interface BoardService {
 	
 
 	public List<BoardVO> getBoardList(int btype);
+	public List<BoardVO> getRecentBoardList(int btype);
 	public List<BoardVO> getBoardListPage(int btype, int displayPost, int postNum); // 게시글리스트(페이징 추가)
 	public List<BoardVO> getBoardListPageSearch(int btype, int displayPost, int postNum, String searchType, String keyword); // 게시글리스트(페이징+검색 추가)
 	

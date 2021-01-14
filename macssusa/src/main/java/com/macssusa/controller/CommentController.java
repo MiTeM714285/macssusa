@@ -11,8 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.macssusa.model.BoardService;
+import com.macssusa.model.BoardVO;
 import com.macssusa.model.CommentService;
 import com.macssusa.model.CommentVO;
 
@@ -28,7 +30,8 @@ public class CommentController {
 	
 	// 댓글 작성
 	@RequestMapping(value = "/writeComment", method = RequestMethod.POST)
-	public String posttWirte(CommentVO commentVo, HttpSession session, HttpServletRequest request) throws Exception {
+	public String posttWirte(int num, CommentVO commentVo, HttpSession session, HttpServletRequest request) throws Exception {
+		System.out.println(num);
 		
 		CommentVO newCommentVo = new CommentVO();
 		newCommentVo.setCnum(commentService.getNextNum());
@@ -43,18 +46,16 @@ public class CommentController {
 	    commentService.writeComment(newCommentVo);
 	    boardService.replyCountUp(commentVo.getBnum());
 
-	    return "redirect:/board/board_view?bnum=" + commentVo.getBnum() + "&btype=" + type;
+	    return "redirect:/board/board_view?num=" + num + "&bnum=" + commentVo.getBnum() + "&btype=" + type;
 	}
 	
 	// 댓글 삭제
 	@RequestMapping(value = "/comment_delete", method = RequestMethod.GET)
-	public String deleteComment(int cnum, int bnum, int btype) throws Exception {
+	public String deleteComment(@RequestParam("num") int num, int cnum, int bnum, int btype) throws Exception {
 		//CommentVO commentVo = commentService.getCommentByCnum(cnum);
 		commentService.deleteComment(cnum);
 		boardService.replyCountDown(bnum);
-		return "redirect:/board/board_view?bnum=" + bnum + "&btype=" + btype;
+		return "redirect:/board/board_view?num="+num+"&bnum=" + bnum + "&btype=" + btype;
 	}
-	
 
-	
 }
