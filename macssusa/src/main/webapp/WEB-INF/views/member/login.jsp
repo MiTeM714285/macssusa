@@ -47,7 +47,7 @@ $("#loginBtn").click(function() {
 		} else if(resp=="fail") { // ID 불일치 -> 회원가입화면으로
 			alert("회원정보를 찾을 수 없습니다.");
 			location.href="/member/login";
-		} else if(resp="notAvailable") {
+		} else if(resp=="notAvailable") {
 			alert("탈퇴하였거나 관리자에 의해 차단되었습니다.");
 			location.href="/member/login";
 		} else { // ID 일치 비밀번호 불일치

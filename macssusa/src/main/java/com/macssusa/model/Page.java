@@ -126,5 +126,29 @@ public class Page {
 	public String getKeyword() {
 		return keyword;
 	}
+	public void setPostNum(int postNum) {
+		this.postNum = postNum;
+	}
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	public void setDisplayPost(int displayPost) {
+		this.displayPost = displayPost;
+	}
+	public void setPageNumCnt(int pageNumCnt) {
+		this.pageNumCnt = pageNumCnt;
+	}
+	public void setEndPageNum(int endPageNum) {
+		this.endPageNum = endPageNum;
+	}
+	public void setStartPageNum(int startPageNum) {
+		this.startPageNum = startPageNum;
+	}
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+	public void setNext(boolean next) {
+		this.next = next;
+	}
 
 }

@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Bootstrap Example</title>
+  <title>💻MACSSUSA🖥</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -19,18 +19,18 @@
       <a class="navbar-brand" href="/">MACSSUSA</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="#">MAC 가이드</a></li>
-      <li><a href="#">나에게 맞는 맥 찾기</a></li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">맥 리뷰<span class="caret"></span></a>
+      <li><a href="#">💻MAC 가이드</a></li>
+      <li><a href="#">🖥나에게 맞는 맥 찾기</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">💻맥 리뷰<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/board/board_page_search?num=1&btype=1">MAC 리뷰게시판</a></li>
-          <li><a href="/board/board_page_search?num=1&btype=3">MAC 질문게시판</a></li>
+          <li><a href="/board/board_page_search?num=1&btype=1">💻MAC 리뷰게시판</a></li>
+          <li><a href="/board/board_page_search?num=1&btype=3">💻MAC 질문게시판</a></li>
         </ul>
       </li>
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">주변기기 리뷰<span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">⌨️주변기기 리뷰<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/board/board_page_search?num=1&btype=2">주변기기 리뷰게시판</a></li>
-          <li><a href="/board/board_page_search?num=1&btype=4">주변기기 질문게시판</a></li>
+          <li><a href="/board/board_page_search?num=1&btype=2">⌨️주변기기 리뷰게시판</a></li>
+          <li><a href="/board/board_page_search?num=1&btype=4">⌨️주변기기 질문게시판</a></li>
         </ul>
       </li>
     </ul>

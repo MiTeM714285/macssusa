@@ -57,11 +57,13 @@
       			<table>
       				<tr>
       					<td>
-      						<button type="button" id="send" class="btn btn-primary">수정</button>
       						<input type="button" class="btn btn-primary pull-left" onclick="location.href='/';" value="취소"/>
       					</td>
       					<td>
-      						<input type="button" class="btn btn-primary pull-right" onclick="if(confirm('정말로 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.'))location.href='member/memberDelete';" value="회원탈퇴"/>
+      						<c:if test="${!empty sessionScope.sessId && sessionScope.isAdmin == false}">
+      							<input type="button" class="btn btn-primary pull-right" onclick="if(confirm('정말로 탈퇴하시겠습니까? 이 작업은 되돌릴 수 없습니다.'))location.href='memberDelete';" value="회원탈퇴"/>
+      						</c:if>
+      						<button type="button" id="send" class="btn btn-primary pull-right">수정</button>
       					</td>
       				</tr>
       			</table>

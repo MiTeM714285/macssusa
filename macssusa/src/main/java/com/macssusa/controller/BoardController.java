@@ -36,45 +36,22 @@ public class BoardController {
 	@Autowired
 	CommentService commentService;
 	
-	// 각 게시판 진입
-	@RequestMapping(value="/board", method=RequestMethod.GET)
-	public void getBoardList(@RequestParam("btype") int btype, Model model) throws Exception {
-		List<BoardVO> list = null;
-		list = service.getBoardList(btype);
-		model.addAttribute("list",list);
-	}
 	
-	// 각 게시판 진입(페이징 추가)
-	@RequestMapping(value="/board_page", method=RequestMethod.GET)
-	public void getBoardListPage(@RequestParam("btype") int btype, @RequestParam("num") int num, Model model) throws Exception {
-
-		Page page = new Page();
-	
-		page.setNum(num);
-		page.setCount(service.getBoardCount(btype));  
-
-		List<BoardVO> list = null;
-		list = service.getBoardListPage(btype, page.getDisplayPost(), page.getPostNum());
-
-		model.addAttribute("list", list);   
-		model.addAttribute("page", page);
-		model.addAttribute("selected", num); // 현재 페이지(선택한 페이지)
-	}
-	
-	// 각 게시판 진입(페이징+검색 추가)
+	// 각 게시판 진입(페이징+검색)
 	@RequestMapping(value="/board_page_search", method=RequestMethod.GET)
 	public void getBoardListPageSearch(@RequestParam("btype") int btype, @RequestParam("num") int num, Model model,
 			@RequestParam(value="searchType", required=false, defaultValue="title") String searchType,
-			@RequestParam(value="keyword", required=false, defaultValue="") String keyword) throws Exception {
+			@RequestParam(value="keyword", required=false, defaultValue="") String keyword,
+			@RequestParam(value="postNumCount", required=false, defaultValue="10") int postNum) throws Exception {
 
 		Page page = new Page();
-	
 		page.setNum(num);
 		page.setCount(service.getBoardCountSearch(btype, searchType, keyword));
 		
 		// 검색 타입과 검색어 데이터
 		page.setSearchType(searchType);
 		page.setKeyword(keyword);
+		page.setPostNum(postNum);
 
 		List<BoardVO> list = null;
 		list = service.getBoardListPageSearch(btype, page.getDisplayPost(), page.getPostNum(), searchType, keyword);
@@ -90,7 +67,6 @@ public class BoardController {
 	// 게시글 작성 진입
 	@RequestMapping(value = "/board_write", method = RequestMethod.GET)
 	public void getWrite() throws Exception {
-	
 	}
 	
 	// 게시글 작성
@@ -153,8 +129,6 @@ public class BoardController {
 				FileCopyUtils.copy(f5.getBytes(), new File(saveDir+fileName5)); // f.transferTo(new File(saveDir+fileName)); 와 같은 로직
 				newBoardVo.setFilename5(fileName5);
 			}
-
-			
 			int type = Integer.parseInt(request.getParameter("btype")); // 게시판 종류가 어떤건지 파악하기위한
 			newBoardVo.setBtype(type);
 			service.writeBoard(newBoardVo);
@@ -166,7 +140,6 @@ public class BoardController {
 	public void getBoardView(int bnum, int btype, Model model, HttpSession session) throws Exception {
 		BoardVO boardVo = service.getBoardView(bnum, btype);
 		model.addAttribute("view",boardVo);
-		
 		// 조회수1증가 (로그인상태에서 자신의글에 조회할시 조회수는 올라가지 않음)
 		String sessId = null;
 		if ((String)session.getAttribute("sessId") != null) {
@@ -176,15 +149,12 @@ public class BoardController {
 		if (sessId == null || (sessId != null && !memberId.equals(sessId))) {
 			service.hitcountUp(bnum);
 		}
-		
 		// 댓글 조회
 		List<CommentVO> comment = null;
 		comment = commentService.getCommentList(bnum);
 		model.addAttribute("comment", comment);
 	}
-	
-	
-	
+
 	// 게시글 수정 진입
 	@RequestMapping(value="/board_update", method=RequestMethod.GET)
 	public void getModify(int bnum, int btype, Model model) throws Exception {
@@ -336,7 +306,6 @@ public class BoardController {
 	public void getDeletedBoardList(Model model) throws Exception {
 		List<BoardVO> list = null;
 		list = service.getDeletedBoardList();
-
 		model.addAttribute("list", list);   
 	}
 	
@@ -344,7 +313,6 @@ public class BoardController {
 	public void getDeletedBoardView(int bnum, int btype, Model model, HttpSession session) throws Exception {
 		BoardVO boardVo = service.getBoardView(bnum, btype);
 		model.addAttribute("view",boardVo);
-		
 		// 댓글 조회
 		List<CommentVO> comment = null;
 		comment = commentService.getCommentList(bnum);
@@ -356,10 +324,8 @@ public class BoardController {
 	public void getDeletedCommentList(Model model) {
 		List<CommentVO> list = null;
 		list = commentService.getDeletedCommentList();
-
 		model.addAttribute("list", list);   
 	}
-	
 	
 	// 삭제된 댓글 내용 보기
 	@RequestMapping(value="/deletedCommentCheck", method=RequestMethod.GET)
@@ -375,6 +341,7 @@ public class BoardController {
 		service.completelyDeleteByBnum(bnum);
 		return "redirect:/board/deletedBoardList";
 	}
+	
 	// 댓글 완전삭제(관리자전용)
 	@RequestMapping(value="/completelyDeleteComment", method=RequestMethod.GET)
 	public String completelyDeleteComment(@RequestParam("cnum") int cnum) throws Exception {

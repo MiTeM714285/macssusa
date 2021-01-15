@@ -8,23 +8,44 @@
 <head>
 <title>insert title here</title>
 </head>
+<style>
+.title {
+	width: 100%;
+	text-align: center;
+}
+</style>
 <body>
 <div class="container">
 	<div class="row">
-		<c:choose>
-			<c:when test="${param.btype == 1 }">
-				<h2>맥 리뷰게시판</h2>
-			</c:when>
-			<c:when test="${param.btype == 2 }">
-				<h2>주변기기 리뷰게시판</h2>
-			</c:when>
-			<c:when test="${param.btype == 3 }">
-				<h2>맥 질문게시판</h2>
-			</c:when>
-			<c:otherwise>
-				<h2>주변기기 질문게시판</h2>
-			</c:otherwise>
-		</c:choose>
+		<table class="title">
+			<tr>
+				<td style="text-align:left;">
+					<c:choose>
+						<c:when test="${param.btype == 1 }">
+							<h2>맥 리뷰게시판</h2>
+						</c:when>
+						<c:when test="${param.btype == 2 }">
+							<h2>주변기기 리뷰게시판</h2>
+						</c:when>
+						<c:when test="${param.btype == 3 }">
+							<h2>맥 질문게시판</h2>
+						</c:when>
+						<c:otherwise>
+							<h2>주변기기 질문게시판</h2>
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td style="text-align:right;">
+					<select name="postNumCount">
+						<option value="5" <c:if test="${page.postNum == 5}">selected</c:if>>5개씩 보기</option>
+						<option value="10" <c:if test="${page.postNum == 10}">selected</c:if>>10개씩 보기</option>
+						<option value="20" <c:if test="${page.postNum == 20}">selected</c:if>>20개씩 보기</option>
+						<option value="30" <c:if test="${page.postNum == 30}">selected</c:if>>30개씩 보기</option>
+					</select>
+					<button type="button" class="btn btn-primary btn-sm" id="postNumBtn">확인</button>
+				</td>
+			</tr>
+		</table>
 		<table class="table table-striped" style="text-align: center; border: 1px solid #dddddd">
 			<colgroup>
 				<col width="10%" />
@@ -64,6 +85,7 @@
 			</div>
 			<!-- 검색 -->
 			<div class="pull-right">
+
 				<select name="searchType">
 					<option value="title" <c:if test="${page.searchType eq 'title'}">selected</c:if>>제목</option>
 					<option value="content" <c:if test="${page.searchType eq 'content'}">selected</c:if>>내용</option>
@@ -110,16 +132,34 @@ function getParameterByName(name) {
  document.getElementById("searchBtn").onclick = function () {
     
   let searchType = document.getElementsByName("searchType")[0].value;
+  let postNumCount = document.getElementsByName("postNumCount")[0].value;
   let keyword =  document.getElementsByName("keyword")[0].value;
   let num = getParameterByName('num');
   let btype = getParameterByName('btype');
 
   console.log(searchType);
+  console.log(postNumCount);
   console.log(keyword);
   console.log(num);
   console.log(btype);
-  location.href = "/board/board_page_search?num="+ num + "&btype=" + btype + "&searchType=" + searchType + "&keyword=" + keyword;
+  location.href = "/board/board_page_search?num="+ num + "&btype=" + btype + "&searchType=" + searchType + "&keyword=" + keyword + "&postNumCount=" + postNumCount;
  };
+
+ document.getElementById("postNumBtn").onclick = function () {
+	    
+	  let searchType = document.getElementsByName("searchType")[0].value;
+	  let postNumCount = document.getElementsByName("postNumCount")[0].value;
+	  let keyword =  document.getElementsByName("keyword")[0].value;
+	  let num = getParameterByName('num');
+	  let btype = getParameterByName('btype');
+
+	  console.log(searchType);
+	  console.log(postNumCount);
+	  console.log(keyword);
+	  console.log(num);
+	  console.log(btype);
+	  location.href = "/board/board_page_search?num="+ num + "&btype=" + btype + "&searchType=" + searchType + "&keyword=" + keyword + "&postNumCount=" + postNumCount;
+	 };
 </script>
 
 </body>
